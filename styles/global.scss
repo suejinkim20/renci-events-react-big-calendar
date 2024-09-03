@@ -1,0 +1,12 @@
+@import 'react-big-calendar/lib/sass/styles';
+
+$primary-color: #ff6347; // Example: Change primary color to tomato
+$event-height: 30px; // Example: Change event height
+
+
+.my-custom-calendar {
+  background-color: #f0f0f0;
+  .rbc-event {
+    border-radius: 5px;
+  }
+}

@@ -1,26 +1,35 @@
-html,
+@import url("../fonts/atlas-grotesk/fonts.css");
+
+:root {
+  --primary-color: #00758d;
+}
+
+html {
+  scroll-padding-top: 8rem;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 body {
-  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size: 12pt;
+}
+
+#__next {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+ul {
+  padding: 0 1rem;
 }

@@ -1,0 +1,32 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 3rem 3rem !important;
+}
+
+.titleContainer {
+}
+
+.title {
+  margin: 1rem 0;
+}
+
+.content {
+  flex: 1;
+}
+
+@media screen and (min-width: 976px) {
+  .section {
+    flex-direction: row;
+    margin: 2rem 0;
+  }
+  .titleContainer {
+    flex: 0 0 400px;
+  }
+  .title {
+    text-align: right;
+    margin: 0;
+  }
+}
+
