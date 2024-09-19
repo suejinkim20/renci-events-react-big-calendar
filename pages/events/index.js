@@ -9,17 +9,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { getAuthorizationToken, fetchEvents } from '../../utils/msft-graph-api';
 import { transformEventData } from '../../utils/eventTransformer';
 import { useRouter } from 'next/router';
-
-// MUI Components
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  Typography,
-  Box,
-} from '@mui/material';
+import { EventDialog } from '../../components/calendar/eventDialog'
+import { Dialog, Typography, Box } from '@mui/material';
 
 const locales = {
   'en-US': require('date-fns/locale/en-US'),
@@ -81,7 +72,7 @@ export default function Events() {
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" gutterBottom>
-        My Calendar
+        HEAL Events Calendar
       </Typography>
       <Calendar
         localizer={localizer}
@@ -98,27 +89,11 @@ export default function Events() {
         onClose={handleCloseDialog}
         aria-labelledby="event-dialog-title"
       >
-        {selectedEvent && (
-          <>
-            <DialogTitle id="event-dialog-title">{selectedEvent.title}</DialogTitle>
-            <DialogContent dividers>
-              <Typography variant="subtitle1">
-                <strong>Date:</strong> {new Date(selectedEvent.start).toLocaleString()}
-              </Typography>
-              <Typography variant="body1">
-                {`${selectedEvent.excerpt} ...` || 'No description available.'}
-              </Typography>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleSeeMore} color="primary" variant="contained">
-                See More
-              </Button>
-              <Button onClick={handleCloseDialog} color="secondary" variant="outlined">
-                Close
-              </Button>
-            </DialogActions>
-          </>
-        )}
+        <EventDialog 
+          selectedEvent={selectedEvent}
+          handleSeeMore={handleSeeMore}
+          handleCloseDialog={handleCloseDialog}
+        />
       </Dialog>
     </Box>
   );
