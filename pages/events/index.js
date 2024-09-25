@@ -10,7 +10,8 @@ import { getAuthorizationToken, fetchEvents } from '../../utils/msft-graph-api';
 import { transformEventData } from '../../utils/eventTransformer';
 import { useRouter } from 'next/router';
 import { EventDialog } from '../../components/calendar/eventDialog'
-import { Dialog, Typography, Box } from '@mui/material';
+import { Page } from '../../components/layout/page'
+import { Dialog, Box } from '@mui/material';
 
 const locales = {
   'en-US': require('date-fns/locale/en-US'),
@@ -23,6 +24,14 @@ const localizer = dateFnsLocalizer({
   getDay,
   locales,
 });
+
+// Define colors for each category
+const categoryColors = {
+  'Purple category': '#FF6347', 
+  'Green category': '#32CD32', 
+  'Yellow category': '#FFBF00',
+  'Uncategorized': '#D3D3D3', // LightGray
+};
 
 export default function Events() {
   const [events, setEvents] = useState([]);
@@ -68,33 +77,50 @@ export default function Events() {
       router.push(`/events/${selectedEvent.id}`);
     }
   };
+  // Function to style events by category
+  const eventStyleGetter = (event) => {
+    const backgroundColor = categoryColors[event.category] || '#D3D3D3'; // Default to gray if no category color is defined
+    return {
+      style: {
+        backgroundColor,
+        borderRadius: '5px',
+        opacity: 0.8,
+        color: 'white',
+        border: '0px',
+        display: 'block',
+      },
+    };
+  };
 
   return (
-    <Box sx={{ padding: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        HEAL Events Calendar
-      </Typography>
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 600 }}
-        onSelectEvent={handleSelectEvent}
-      />
+    <Page title="HEAL Event Calendar">
+      <Box sx={{ padding: 2 }}>
+        <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 600 }}
+          onSelectEvent={handleSelectEvent}
+          eventPropGetter={eventStyleGetter} // Apply colors based on categories
 
-      {/* MUI Dialog for Event Details */}
-      <Dialog
-        open={dialogOpen}
-        onClose={handleCloseDialog}
-        aria-labelledby="event-dialog-title"
-      >
-        <EventDialog 
-          selectedEvent={selectedEvent}
-          handleSeeMore={handleSeeMore}
-          handleCloseDialog={handleCloseDialog}
         />
-      </Dialog>
-    </Box>
+        <br/><br/>
+
+        {/* MUI Dialog for Event Details */}
+        <Dialog
+          open={dialogOpen}
+          onClose={handleCloseDialog}
+          aria-labelledby="event-dialog-title"
+        >
+          <EventDialog 
+            selectedEvent={selectedEvent}
+            handleSeeMore={handleSeeMore}
+            handleCloseDialog={handleCloseDialog}
+          />
+        </Dialog>
+      </Box>
+    </Page>
+
   );
 }

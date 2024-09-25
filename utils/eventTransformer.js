@@ -10,5 +10,6 @@ export function transformEventData(events) {
     location: event.location.displayName || '',
     excerpt: event.bodyPreview || '',
     description: event.body.content || '',
+    category: event.categories.length ? event.categories[0] : 'Uncategorized', // Default if no category
   }));
 }
