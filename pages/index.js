@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { Page } from '../components/layout'
-import CustomBigCalendar from '../components/calendar/calendar'
+import LoremIpsumCalendar from '../components/calendar/loremIpsumCalendar'
 
 export default function Home() {
   return (
@@ -15,7 +15,11 @@ export default function Home() {
 
       <main>
         <Page title="Events">
-          <CustomBigCalendar />
+          <a href="/events">
+            Link to HEAL Calendar
+          </a>
+          
+          <LoremIpsumCalendar />
           <br/><br/>
 
         </Page>

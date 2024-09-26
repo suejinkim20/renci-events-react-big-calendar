@@ -21,7 +21,7 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const CustomBigCalendar = () => {
+const LoremIpsumCalendar = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [delayedEvents, setDelayedEvents] = useState([]);
@@ -76,4 +76,4 @@ const CustomBigCalendar = () => {
   );
 };
 
-export default CustomBigCalendar;
+export default LoremIpsumCalendar;
